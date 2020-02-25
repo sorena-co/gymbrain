@@ -22,6 +22,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
@@ -63,6 +64,11 @@ public class PostResourceIT {
 
     private static final String DEFAULT_ACTIVE_BY = "AAAAAAAAAA";
     private static final String UPDATED_ACTIVE_BY = "BBBBBBBBBB";
+
+    private static final byte[] DEFAULT_FILE = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_FILE = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_FILE_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_FILE_CONTENT_TYPE = "image/png";
 
     @Autowired
     private PostRepository postRepository;
@@ -123,7 +129,9 @@ public class PostResourceIT {
             .postType(DEFAULT_POST_TYPE)
             .active(DEFAULT_ACTIVE)
             .activeDate(DEFAULT_ACTIVE_DATE)
-            .activeBy(DEFAULT_ACTIVE_BY);
+            .activeBy(DEFAULT_ACTIVE_BY)
+            .file(DEFAULT_FILE)
+            .fileContentType(DEFAULT_FILE_CONTENT_TYPE);
         return post;
     }
     /**
@@ -139,7 +147,9 @@ public class PostResourceIT {
             .postType(UPDATED_POST_TYPE)
             .active(UPDATED_ACTIVE)
             .activeDate(UPDATED_ACTIVE_DATE)
-            .activeBy(UPDATED_ACTIVE_BY);
+            .activeBy(UPDATED_ACTIVE_BY)
+            .file(UPDATED_FILE)
+            .fileContentType(UPDATED_FILE_CONTENT_TYPE);
         return post;
     }
 
@@ -170,6 +180,8 @@ public class PostResourceIT {
         assertThat(testPost.isActive()).isEqualTo(DEFAULT_ACTIVE);
         assertThat(testPost.getActiveDate()).isEqualTo(DEFAULT_ACTIVE_DATE);
         assertThat(testPost.getActiveBy()).isEqualTo(DEFAULT_ACTIVE_BY);
+        assertThat(testPost.getFile()).isEqualTo(DEFAULT_FILE);
+        assertThat(testPost.getFileContentType()).isEqualTo(DEFAULT_FILE_CONTENT_TYPE);
     }
 
     @Test
@@ -266,7 +278,9 @@ public class PostResourceIT {
             .andExpect(jsonPath("$.[*].postType").value(hasItem(DEFAULT_POST_TYPE)))
             .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())))
             .andExpect(jsonPath("$.[*].activeDate").value(hasItem(sameInstant(DEFAULT_ACTIVE_DATE))))
-            .andExpect(jsonPath("$.[*].activeBy").value(hasItem(DEFAULT_ACTIVE_BY)));
+            .andExpect(jsonPath("$.[*].activeBy").value(hasItem(DEFAULT_ACTIVE_BY)))
+            .andExpect(jsonPath("$.[*].fileContentType").value(hasItem(DEFAULT_FILE_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].file").value(hasItem(Base64Utils.encodeToString(DEFAULT_FILE))));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -318,7 +332,9 @@ public class PostResourceIT {
             .andExpect(jsonPath("$.postType").value(DEFAULT_POST_TYPE))
             .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()))
             .andExpect(jsonPath("$.activeDate").value(sameInstant(DEFAULT_ACTIVE_DATE)))
-            .andExpect(jsonPath("$.activeBy").value(DEFAULT_ACTIVE_BY));
+            .andExpect(jsonPath("$.activeBy").value(DEFAULT_ACTIVE_BY))
+            .andExpect(jsonPath("$.fileContentType").value(DEFAULT_FILE_CONTENT_TYPE))
+            .andExpect(jsonPath("$.file").value(Base64Utils.encodeToString(DEFAULT_FILE)));
     }
 
     @Test
@@ -347,7 +363,9 @@ public class PostResourceIT {
             .postType(UPDATED_POST_TYPE)
             .active(UPDATED_ACTIVE)
             .activeDate(UPDATED_ACTIVE_DATE)
-            .activeBy(UPDATED_ACTIVE_BY);
+            .activeBy(UPDATED_ACTIVE_BY)
+            .file(UPDATED_FILE)
+            .fileContentType(UPDATED_FILE_CONTENT_TYPE);
         PostDTO postDTO = postMapper.toDto(updatedPost);
 
         restPostMockMvc.perform(put("/api/posts")
@@ -365,6 +383,8 @@ public class PostResourceIT {
         assertThat(testPost.isActive()).isEqualTo(UPDATED_ACTIVE);
         assertThat(testPost.getActiveDate()).isEqualTo(UPDATED_ACTIVE_DATE);
         assertThat(testPost.getActiveBy()).isEqualTo(UPDATED_ACTIVE_BY);
+        assertThat(testPost.getFile()).isEqualTo(UPDATED_FILE);
+        assertThat(testPost.getFileContentType()).isEqualTo(UPDATED_FILE_CONTENT_TYPE);
     }
 
     @Test

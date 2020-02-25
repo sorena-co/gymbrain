@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import javax.persistence.Lob;
 
 /**
  * A DTO for the {@link ir.gymbrain.domain.Post} entity.
@@ -28,6 +29,10 @@ public class PostDTO implements Serializable {
 
     private String activeBy;
 
+    @Lob
+    private byte[] file;
+
+    private String fileContentType;
 
     private Set<TagDTO> tags = new HashSet<>();
 
@@ -87,6 +92,22 @@ public class PostDTO implements Serializable {
         this.activeBy = activeBy;
     }
 
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
+
+    public String getFileContentType() {
+        return fileContentType;
+    }
+
+    public void setFileContentType(String fileContentType) {
+        this.fileContentType = fileContentType;
+    }
+
     public Set<TagDTO> getTags() {
         return tags;
     }
@@ -126,6 +147,7 @@ public class PostDTO implements Serializable {
             ", active='" + isActive() + "'" +
             ", activeDate='" + getActiveDate() + "'" +
             ", activeBy='" + getActiveBy() + "'" +
+            ", file='" + getFile() + "'" +
             "}";
     }
 }

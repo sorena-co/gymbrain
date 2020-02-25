@@ -29,6 +29,13 @@
                 <dd>
                     <span>{{post.activeBy}}</span>
                 </dd>
+                <dt><span jhiTranslate="gymbrainApp.post.file">File</span></dt>
+                <dd>
+                    <div *ngIf="post.file">
+                        <a (click)="openFile(post.fileContentType, post.file)" jhiTranslate="entity.action.open">open</a>
+                        {{post.fileContentType}}, {{byteSize(post.file)}}
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="gymbrainApp.post.tag">Tag</span></dt>
                 <dd>
                     <span *ngFor="let tag of post.tags; let last = last">

@@ -25,6 +25,7 @@
             <th scope="col"  jhiSortBy="active"><span jhiTranslate="gymbrainApp.post.active">Active</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="activeDate"><span jhiTranslate="gymbrainApp.post.activeDate">Active Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="activeBy"><span jhiTranslate="gymbrainApp.post.activeBy">Active By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="file"><span jhiTranslate="gymbrainApp.post.file">File</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
             </thead>
@@ -37,6 +38,10 @@
                 <td>{{post.active}}</td>
                 <td>{{post.activeDate | date:'medium'}}</td>
                 <td>{{post.activeBy}}</td>
+                <td>
+                    <a *ngIf="post.file" (click)="openFile(post.fileContentType, post.file)" jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="post.file">{{post.fileContentType}}, {{byteSize(post.file)}}</span>
+                </td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

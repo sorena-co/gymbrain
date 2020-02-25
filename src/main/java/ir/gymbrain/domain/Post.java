@@ -43,6 +43,13 @@ public class Post implements Serializable {
     @Column(name = "active_by")
     private String activeBy;
 
+    @Lob
+    @Column(name = "file")
+    private byte[] file;
+
+    @Column(name = "file_content_type")
+    private String fileContentType;
+
     @OneToMany(mappedBy = "post")
     private Set<Comment> comments = new HashSet<>();
 
@@ -140,6 +147,32 @@ public class Post implements Serializable {
 
     public void setActiveBy(String activeBy) {
         this.activeBy = activeBy;
+    }
+
+    public byte[] getFile() {
+        return file;
+    }
+
+    public Post file(byte[] file) {
+        this.file = file;
+        return this;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
+
+    public String getFileContentType() {
+        return fileContentType;
+    }
+
+    public Post fileContentType(String fileContentType) {
+        this.fileContentType = fileContentType;
+        return this;
+    }
+
+    public void setFileContentType(String fileContentType) {
+        this.fileContentType = fileContentType;
     }
 
     public Set<Comment> getComments() {
@@ -244,6 +277,8 @@ public class Post implements Serializable {
             ", active='" + isActive() + "'" +
             ", activeDate='" + getActiveDate() + "'" +
             ", activeBy='" + getActiveBy() + "'" +
+            ", file='" + getFile() + "'" +
+            ", fileContentType='" + getFileContentType() + "'" +
             "}";
     }
 }

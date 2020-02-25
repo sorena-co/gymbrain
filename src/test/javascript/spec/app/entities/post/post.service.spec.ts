@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Post(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', false, currentDate, 'AAAAAAA');
+      elemDefault = new Post(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', false, currentDate, 'AAAAAAA', 'image/png', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -76,7 +76,8 @@ describe('Service Tests', () => {
             postType: 'BBBBBB',
             active: true,
             activeDate: currentDate.format(DATE_TIME_FORMAT),
-            activeBy: 'BBBBBB'
+            activeBy: 'BBBBBB',
+            file: 'BBBBBB'
           },
           elemDefault
         );
@@ -104,7 +105,8 @@ describe('Service Tests', () => {
             postType: 'BBBBBB',
             active: true,
             activeDate: currentDate.format(DATE_TIME_FORMAT),
-            activeBy: 'BBBBBB'
+            activeBy: 'BBBBBB',
+            file: 'BBBBBB'
           },
           elemDefault
         );

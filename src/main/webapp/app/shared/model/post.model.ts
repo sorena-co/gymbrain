@@ -11,6 +11,8 @@ export interface IPost {
   active?: boolean;
   activeDate?: Moment;
   activeBy?: string;
+  fileContentType?: string;
+  file?: any;
   comments?: IComment[];
   likes?: ILike[];
   tags?: ITag[];
@@ -25,6 +27,8 @@ export class Post implements IPost {
     public active?: boolean,
     public activeDate?: Moment,
     public activeBy?: string,
+    public fileContentType?: string,
+    public file?: any,
     public comments?: IComment[],
     public likes?: ILike[],
     public tags?: ITag[]

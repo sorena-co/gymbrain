@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { JhiAlertService } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IPost, Post } from 'app/shared/model/post.model';
 import { PostService } from './post.service';
 import { ITag } from 'app/shared/model/tag.model';
@@ -30,10 +30,13 @@ export class PostUpdateComponent implements OnInit {
     active: [],
     activeDate: [],
     activeBy: [],
+    file: [],
+    fileContentType: [],
     tags: []
   });
 
   constructor(
+    protected dataUtils: JhiDataUtils,
     protected jhiAlertService: JhiAlertService,
     protected postService: PostService,
     protected tagService: TagService,
@@ -60,8 +63,43 @@ export class PostUpdateComponent implements OnInit {
       active: post.active,
       activeDate: post.activeDate != null ? post.activeDate.format(DATE_TIME_FORMAT) : null,
       activeBy: post.activeBy,
+      file: post.file,
+      fileContentType: post.fileContentType,
       tags: post.tags
     });
+  }
+
+  byteSize(field) {
+    return this.dataUtils.byteSize(field);
+  }
+
+  openFile(contentType, field) {
+    return this.dataUtils.openFile(contentType, field);
+  }
+
+  setFileData(event, field: string, isImage) {
+    return new Promise((resolve, reject) => {
+      if (event && event.target && event.target.files && event.target.files[0]) {
+        const file: File = event.target.files[0];
+        if (isImage && !file.type.startsWith('image/')) {
+          reject(`File was expected to be an image but was found to be ${file.type}`);
+        } else {
+          const filedContentType: string = field + 'ContentType';
+          this.dataUtils.toBase64(file, base64Data => {
+            this.editForm.patchValue({
+              [field]: base64Data,
+              [filedContentType]: file.type
+            });
+          });
+        }
+      } else {
+        reject(`Base64 data was not set as file could not be extracted from passed parameter: ${event}`);
+      }
+    }).then(
+      // eslint-disable-next-line no-console
+      () => console.log('blob added'), // success
+      this.onError
+    );
   }
 
   previousState() {
@@ -89,6 +127,8 @@ export class PostUpdateComponent implements OnInit {
       activeDate:
         this.editForm.get(['activeDate']).value != null ? moment(this.editForm.get(['activeDate']).value, DATE_TIME_FORMAT) : undefined,
       activeBy: this.editForm.get(['activeBy']).value,
+      fileContentType: this.editForm.get(['fileContentType']).value,
+      file: this.editForm.get(['file']).value,
       tags: this.editForm.get(['tags']).value
     };
   }

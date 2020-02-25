@@ -33,6 +33,11 @@
         {
             "fieldName": "activeBy",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "file",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
         }
     ],
     "relationships": [
@@ -57,7 +62,7 @@
             "ownerSide": true
         }
     ],
-    "changelogDate": "20200225121432",
+    "changelogDate": "20200225122906",
     "entityTableName": "post",
     "dto": "mapstruct",
     "pagination": "pagination",

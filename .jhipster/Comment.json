@@ -30,7 +30,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20200225121434",
+    "changelogDate": "20200225122908",
     "entityTableName": "comment",
     "dto": "mapstruct",
     "pagination": "pagination",
