@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="comment">
+            <h2><span jhiTranslate="gymbrainApp.comment.detail.title">Comment</span> {{comment.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gymbrainApp.comment.title">Title</span></dt>
+                <dd>
+                    <span>{{comment.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="gymbrainApp.comment.active">Active</span></dt>
+                <dd>
+                    <span>{{comment.active}}</span>
+                </dd>
+                <dt><span jhiTranslate="gymbrainApp.comment.activeBy">Active By</span></dt>
+                <dd>
+                    <span>{{comment.activeBy}}</span>
+                </dd>
+                <dt><span jhiTranslate="gymbrainApp.comment.activeDate">Active Date</span></dt>
+                <dd>
+                    <span>{{comment.activeDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="gymbrainApp.comment.post">Post</span></dt>
+                <dd>
+                    <div *ngIf="comment.postId">
+                        <a [routerLink]="['/post', comment.postId, 'view']">{{comment.postId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/comment', comment.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

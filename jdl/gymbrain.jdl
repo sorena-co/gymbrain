@@ -1,0 +1,42 @@
+entity Post{
+    title String required,
+    summary String required,
+    postType String required,
+    active Boolean,
+    activeDate ZonedDateTime,
+    activeBy String
+}
+
+entity Tag{
+    title String required
+}
+
+entity Comment{
+    title String required,
+    active Boolean,
+    activeBy String,
+    activeDate ZonedDateTime
+}
+
+entity Like{
+    username String required
+}
+
+enum PostType{
+    TEXT,
+    IMAGE,
+    VIDEO
+}
+
+relationship OneToMany{
+    Post{comment(title)} to Comment,
+    Post{like(username)} to Like
+}
+
+relationship ManyToMany {
+  Post{tag(title)} to Tag{post}
+}
+
+dto * with mapstruct
+paginate * with pagination
+service * with serviceClass
