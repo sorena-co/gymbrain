@@ -1,0 +1,41 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "ir.gymbrain",
+      "nativeLanguage": "fa"
+    },
+    "jhipsterVersion": "6.5.1",
+    "applicationType": "monolith",
+    "baseName": "gymbrain",
+    "packageName": "ir.gymbrain",
+    "packageFolder": "ir/gymbrain",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "no",
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ZGIwMzgyOWU2NjQxY2RkYTk5YzE4OGVlMTE2N2ZmNzAwNWNmMzkwNmJkMDRmMTNiMzYyZmQwYjIwOGM0OWJjZGEzMmZlYTA3NTNiM2ZkNzU2ZDU4ZDllN2MzMTM3MTdiOTc4M2Q0ZWM0NzdmMGI4ZWJlNTNiMWI5YjNmMDQxZDA=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "materia",
+    "clientThemeVariant": "dark",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "fa",
+    "languages": ["fa", "en"],
+    "blueprints": []
+  }
+}
