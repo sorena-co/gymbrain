@@ -1,7 +1,7 @@
 entity Post{
     title String required,
     summary String required,
-    postType String required,
+    postType PostType required,
     active Boolean,
     activeDate ZonedDateTime,
     activeBy String,

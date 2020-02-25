@@ -2,12 +2,13 @@ import { Moment } from 'moment';
 import { IComment } from 'app/shared/model/comment.model';
 import { ILike } from 'app/shared/model/like.model';
 import { ITag } from 'app/shared/model/tag.model';
+import { PostType } from 'app/shared/model/enumerations/post-type.model';
 
 export interface IPost {
   id?: number;
   title?: string;
   summary?: string;
-  postType?: string;
+  postType?: PostType;
   active?: boolean;
   activeDate?: Moment;
   activeBy?: string;
@@ -23,7 +24,7 @@ export class Post implements IPost {
     public id?: number,
     public title?: string,
     public summary?: string,
-    public postType?: string,
+    public postType?: PostType,
     public active?: boolean,
     public activeDate?: Moment,
     public activeBy?: string,

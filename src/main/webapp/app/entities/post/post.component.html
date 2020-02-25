@@ -34,7 +34,7 @@
                 <td><a [routerLink]="['/post', post.id, 'view' ]">{{post.id}}</a></td>
                 <td>{{post.title}}</td>
                 <td>{{post.summary}}</td>
-                <td>{{post.postType}}</td>
+                <td jhiTranslate="{{'gymbrainApp.PostType.' + post.postType}}">{{post.postType}}</td>
                 <td>{{post.active}}</td>
                 <td>{{post.activeDate | date:'medium'}}</td>
                 <td>{{post.activeBy}}</td>

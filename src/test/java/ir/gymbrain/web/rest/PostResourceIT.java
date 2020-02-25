@@ -41,6 +41,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import ir.gymbrain.domain.enumeration.PostType;
 /**
  * Integration tests for the {@link PostResource} REST controller.
  */
@@ -53,8 +54,8 @@ public class PostResourceIT {
     private static final String DEFAULT_SUMMARY = "AAAAAAAAAA";
     private static final String UPDATED_SUMMARY = "BBBBBBBBBB";
 
-    private static final String DEFAULT_POST_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_POST_TYPE = "BBBBBBBBBB";
+    private static final PostType DEFAULT_POST_TYPE = PostType.TEXT;
+    private static final PostType UPDATED_POST_TYPE = PostType.IMAGE;
 
     private static final Boolean DEFAULT_ACTIVE = false;
     private static final Boolean UPDATED_ACTIVE = true;
@@ -275,7 +276,7 @@ public class PostResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(post.getId().intValue())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].summary").value(hasItem(DEFAULT_SUMMARY)))
-            .andExpect(jsonPath("$.[*].postType").value(hasItem(DEFAULT_POST_TYPE)))
+            .andExpect(jsonPath("$.[*].postType").value(hasItem(DEFAULT_POST_TYPE.toString())))
             .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())))
             .andExpect(jsonPath("$.[*].activeDate").value(hasItem(sameInstant(DEFAULT_ACTIVE_DATE))))
             .andExpect(jsonPath("$.[*].activeBy").value(hasItem(DEFAULT_ACTIVE_BY)))
@@ -329,7 +330,7 @@ public class PostResourceIT {
             .andExpect(jsonPath("$.id").value(post.getId().intValue()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
             .andExpect(jsonPath("$.summary").value(DEFAULT_SUMMARY))
-            .andExpect(jsonPath("$.postType").value(DEFAULT_POST_TYPE))
+            .andExpect(jsonPath("$.postType").value(DEFAULT_POST_TYPE.toString()))
             .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()))
             .andExpect(jsonPath("$.activeDate").value(sameInstant(DEFAULT_ACTIVE_DATE)))
             .andExpect(jsonPath("$.activeBy").value(DEFAULT_ACTIVE_BY))

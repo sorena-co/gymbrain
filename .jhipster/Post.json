@@ -17,7 +17,8 @@
         },
         {
             "fieldName": "postType",
-            "fieldType": "String",
+            "fieldType": "PostType",
+            "fieldValues": "TEXT,IMAGE,VIDEO",
             "fieldValidateRules": [
                 "required"
             ]

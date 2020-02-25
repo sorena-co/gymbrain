@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { PostService } from 'app/entities/post/post.service';
 import { IPost, Post } from 'app/shared/model/post.model';
+import { PostType } from 'app/shared/model/enumerations/post-type.model';
 
 describe('Service Tests', () => {
   describe('Post Service', () => {
@@ -24,7 +25,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Post(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', false, currentDate, 'AAAAAAA', 'image/png', 'AAAAAAA');
+      elemDefault = new Post(0, 'AAAAAAA', 'AAAAAAA', PostType.TEXT, false, currentDate, 'AAAAAAA', 'image/png', 'AAAAAAA');
     });
 
     describe('Service methods', () => {

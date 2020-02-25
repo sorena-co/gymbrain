@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 import javax.persistence.Lob;
+import ir.gymbrain.domain.enumeration.PostType;
 
 /**
  * A DTO for the {@link ir.gymbrain.domain.Post} entity.
@@ -21,7 +22,7 @@ public class PostDTO implements Serializable {
     private String summary;
 
     @NotNull
-    private String postType;
+    private PostType postType;
 
     private Boolean active;
 
@@ -60,11 +61,11 @@ public class PostDTO implements Serializable {
         this.summary = summary;
     }
 
-    public String getPostType() {
+    public PostType getPostType() {
         return postType;
     }
 
-    public void setPostType(String postType) {
+    public void setPostType(PostType postType) {
         this.postType = postType;
     }
 

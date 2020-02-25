@@ -33,8 +33,11 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gymbrainApp.post.postType" for="field_postType">Post Type</label>
-                    <input type="text" class="form-control" name="postType" id="field_postType"
-                           formControlName="postType"/>
+                    <select class="form-control" name="postType" formControlName="postType" id="field_postType">
+                        <option value="TEXT">{{'gymbrainApp.PostType.TEXT' | translate}}</option>
+                        <option value="IMAGE">{{'gymbrainApp.PostType.IMAGE' | translate}}</option>
+                        <option value="VIDEO">{{'gymbrainApp.PostType.VIDEO' | translate}}</option>
+                    </select>
                     <div *ngIf="editForm.get('postType').invalid && (editForm.get('postType').dirty || editForm.get('postType').touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('postType').errors.required" jhiTranslate="entity.validation.required">

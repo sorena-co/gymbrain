@@ -8,6 +8,8 @@ import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import ir.gymbrain.domain.enumeration.PostType;
+
 /**
  * A Post.
  */
@@ -31,8 +33,9 @@ public class Post implements Serializable {
     private String summary;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "post_type", nullable = false)
-    private String postType;
+    private PostType postType;
 
     @Column(name = "active")
     private Boolean active;
@@ -97,16 +100,16 @@ public class Post implements Serializable {
         this.summary = summary;
     }
 
-    public String getPostType() {
+    public PostType getPostType() {
         return postType;
     }
 
-    public Post postType(String postType) {
+    public Post postType(PostType postType) {
         this.postType = postType;
         return this;
     }
 
-    public void setPostType(String postType) {
+    public void setPostType(PostType postType) {
         this.postType = postType;
     }
 
