@@ -4,7 +4,8 @@ entity Post{
     postType String required,
     active Boolean,
     activeDate ZonedDateTime,
-    activeBy String
+    activeBy String,
+    file Blob
 }
 
 entity Tag{
